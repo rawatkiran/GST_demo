@@ -1,0 +1,65 @@
+<html>
+<head>
+    <title>GST DEMONSTRATOR</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+</head>
+<body>
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">GST Demonstrator</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="{% url 'index' %}">Home</a></li>
+      <li><a href="{%url 'chart' %}">Pie-Chart</a></li>
+    </ul>
+  </div>
+</nav>
+<div class="row">
+        <div class="col-sm-3"></div>
+        <div class="col-sm-5">
+            <h2>Percentage of Product in each GST Slab</h2>
+            <canvas id="myChart"></canvas>
+        </div>
+        <div class="col-sm-3"></div>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+<script>
+
+var data = {
+    datasets: [{
+        data: [{{ gst5p }}, {{ gst12p }}, {{ gst18p }}, {{ gst28p }}],
+        backgroundColor: [
+                "#FF6384",
+                "#63FF84",
+                "#6384FF",
+                "#8463FF",
+            ],
+
+    }],
+
+    // These labels appear in the legend and in the tooltips when hovering different arcs
+
+    labels: [
+        'GST 5%',
+        'GST 12%',
+        'GST 18%',
+        'GST 28%'
+    ]
+};
+    var ctx = document.getElementById('myChart').getContext('2d');
+var myPieChart = new Chart(ctx,{
+    type: 'pie',
+    data: data,
+    options: {}
+});
+    </script>
+</body>
+</html>
